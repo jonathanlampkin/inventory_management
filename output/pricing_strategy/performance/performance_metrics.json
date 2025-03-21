@@ -1,0 +1,21 @@
+{
+    "data_loading": {
+        "duration_seconds": 0.093289,
+        "memory_usage_mb": 28.36972999572754,
+        "row_count": 73100,
+        "column_count": 16
+    },
+    "elasticity_analysis": {
+        "duration_seconds": 2.529012,
+        "products_analyzed": 20,
+        "elastic_products": 0,
+        "inelastic_products": 20
+    },
+    "discount_analysis": {
+        "duration_seconds": 0.218669
+    },
+    "competitive_analysis": {
+        "duration_seconds": 0.260492
+    },
+    "total_runtime": 3.148428
+}

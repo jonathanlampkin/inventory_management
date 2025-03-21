@@ -1,0 +1,18 @@
+{
+    "status": "failed",
+    "timestamp": "2025-03-21 15:51:13",
+    "file": "data/retail_store_inventory.csv",
+    "rows": 73100,
+    "columns": 15,
+    "schema_validation": {
+        "passed": false,
+        "errors": [
+            {
+                "column": null,
+                "row": -1,
+                "message": "Invalid number of columns. The schema specifies 13, but the data frame has 15"
+            }
+        ]
+    },
+    "missing_values": {
+        "has_missing": 

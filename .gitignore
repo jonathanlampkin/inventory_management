@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+venv/
+ENV/
+
+# Virtual Environment
+.venv
+venv/
+env/
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Project specific
+# Keep only necessary output files and exclude large visualization files
+output/visualizations/*.png
+output/dashboard/*.png
+output/logs/*.log
+output/execution_logs/
+
+# Exception for files needed by the dashboard
+!output/forecasting/forecast_results.json
+!output/inventory_optimization/inventory_optimization_results.json
+!output/pricing_strategy/pricing_strategy_results.json
+!output/eda/supply_analysis/supply_analysis_results.json
+!data/retail_store_inventory.csv
+# Exclude large model files
+output/forecasting/models/*.pkl

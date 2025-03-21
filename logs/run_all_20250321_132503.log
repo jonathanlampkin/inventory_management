@@ -1,0 +1,252 @@
+
+
+==================================================
+RUNNING: scripts/llm_data_understanding.py
+TIME: 2025-03-21 13:25:03
+==================================================
+
+STDOUT:
+[1;34mUpgrade to ydata-sdk[0m
+Improve your data and profiling with ydata-sdk, featuring data quality scoring, redundancy detection, outlier identification, text validation, and synthetic data generation.
+Register at ttps://ydata.ai/register
+Loading data...
+Generating basic information...
+Analyzing temporal aspects...
+Analyzing categorical variables...
+Analyzing numerical variables...
+Analyzing relationships...
+Generating insights...
+Saving JSON report...
+JSON report saved to output/data_understanding.json
+Generating markdown report...
+Markdown report saved to output/data_understanding.md
+Generating profile report (this may take a while)...
+Profile report saved to output/profile_report.html
+Creating visualizations...
+Visualizations saved to output/visualizations
+Analysis complete!
+
+STDERR:
+
+Summarize dataset:   0%|          | 0/5 [00:00<?, ?it/s]
+Summarize dataset:   0%|          | 0/23 [00:00<?, ?it/s, Describe variable: Date]
+Summarize dataset:   0%|          | 0/23 [00:00<?, ?it/s, Describe variable: Store ID]
+Summarize dataset:   0%|          | 0/23 [00:00<?, ?it/s, Describe variable: Product ID]
+Summarize dataset:   0%|          | 0/23 [00:00<?, ?it/s, Describe variable: Category]  
+Summarize dataset:   0%|          | 0/23 [00:00<?, ?it/s, Describe variable: Region]  
+Summarize dataset:   0%|          | 0/23 [00:00<?, ?it/s, Describe variable: Inventory Level]
+Summarize dataset:   0%|          | 0/23 [00:00<?, ?it/s, Describe variable: Units Sold]     
+Summarize dataset:   0%|          | 0/23 [00:00<?, ?it/s, Describe variable: Units Ordered]
+Summarize dataset:   0%|          | 0/23 [00:00<?, ?it/s, Describe variable: Demand Forecast]
+Summarize dataset:   0%|          | 0/23 [00:00<?, ?it/s, Describe variable: Price]          
+Summarize dataset:   0%|          | 0/23 [00:00<?, ?it/s, Describe variable: Discount]
+Summarize dataset:   0%|          | 0/23 [00:00<?, ?it/s, Describe variable: Weather Condition]
+Summarize dataset:   0%|          | 0/23 [00:00<?, ?it/s, Describe variable: Holiday/Promotion]
+Summarize dataset:   0%|          | 0/23 [00:00<?, ?it/s, Describe variable: Competitor Pricing]
+Summarize dataset:   0%|          | 0/23 [00:00<?, ?it/s, Describe variable: Seasonality]       
+Summarize dataset:   0%|          | 0/23 [00:00<?, ?it/s, Describe variable: Year]       
+
+  0%|          | 0/18 [00:00<?, ?it/s][A
+Summarize dataset:   4%|▍         | 1/23 [00:00<00:12,  1.73it/s, Describe variable: Year]
+Summarize dataset:   4%|▍         | 1/23 [00:00<00:12,  1.73it/s, Describe variable: Month]
+Summarize dataset:   9%|▊         | 2/23 [00:00<00:12,  1.73it/s, Describe variable: Day]  
+Summarize dataset:  13%|█▎        | 3/23 [00:00<00:04,  4.86it/s, Describe variable: Day]
+Summarize dataset:  26%|██▌       | 6/23 [00:00<00:01,  9.48it/s, Describe variable: Day]
+
+  6%|▌         | 1/18 [00:00<00:10,  1.64it/s][A
+Summarize dataset:  48%|████▊     | 11/23 [00:00<00:00, 17.77it/s, Describe variable: Day]
+100%|██████████| 18/18 [00:00<00:00, 26.64it/s]
+
+Summarize dataset:  78%|███████▊  | 18/23 [00:01<00:00, 17.77it/s, Get variable types]    
+Summarize dataset:  79%|███████▉  | 19/24 [00:01<00:00, 17.77it/s, Get dataframe statistics]
+Summarize dataset:  80%|████████  | 20/25 [00:01<00:00, 17.77it/s, Calculate auto correlation]/mnt/hdd/venvs/inventory_management_venv/lib/python3.12/site-packages/ydata_profiling/model/pandas/discretize_pandas.py:52: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value '[0 0 0 ... 9 9 9]' has dtype incompatible with int32, please explicitly cast to a compatible dtype first.
+  discretized_df.loc[:, column] = self._discretize_column(
+/mnt/hdd/venvs/inventory_management_venv/lib/python3.12/site-packages/ydata_profiling/model/pandas/discretize_pandas.py:52: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value '[0 0 0 ... 0 0 0]' has dtype incompatible with int32, please explicitly cast to a compatible dtype first.
+  discretized_df.loc[:, column] = self._discretize_column(
+/mnt/hdd/venvs/inventory_management_venv/lib/python3.12/site-packages/ydata_profiling/model/pandas/discretize_pandas.py:52: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value '[0 0 0 ... 0 0 0]' has dtype incompatible with int32, please explicitly cast to a compatible dtype first.
+  discretized_df.loc[:, column] = self._discretize_column(
+
+Summarize dataset:  84%|████████▍ | 21/25 [00:01<00:00, 12.90it/s, Calculate auto correlation]
+Summarize dataset:  84%|████████▍ | 21/25 [00:01<00:00, 12.90it/s, Get scatter matrix]        
+Summarize dataset:  24%|██▎       | 21/89 [00:01<00:05, 12.90it/s, scatter Inventory Level, Inventory Level]
+Summarize dataset:  25%|██▍       | 22/89 [00:01<00:05, 12.90it/s, scatter Units Sold, Inventory Level]     
+Summarize dataset:  26%|██▌       | 23/89 [00:02<00:05, 12.90it/s, scatter Units Ordered, Inventory Level]
+Summarize dataset:  27%|██▋       | 24/89 [00:02<00:04, 13.33it/s, scatter Units Ordered, Inventory Level]
+Summarize dataset:  27%|██▋       | 24/89 [00:02<00:04, 13.33it/s, scatter Demand Forecast, Inventory Level]
+Summarize dataset:  28%|██▊       | 25/89 [00:02<00:04, 13.33it/s, scatter Price, Inventory Level]          
+Summarize dataset:  29%|██▉       | 26/89 [00:02<00:05, 12.29it/s, scatter Price, Inventory Level]
+Summarize dataset:  29%|██▉       | 26/89 [00:02<00:05, 12.29it/s, scatter Competitor Pricing, Inventory Level]
+Summarize dataset:  30%|███       | 27/89 [00:02<00:05, 12.29it/s, scatter Month, Inventory Level]             
+Summarize dataset:  31%|███▏      | 28/89 [00:02<00:04, 13.07it/s, scatter Month, Inventory Level]
+Summarize dataset:  31%|███▏      | 28/89 [00:02<00:04, 13.07it/s, scatter Day, Inventory Level]  
+Summarize dataset:  33%|███▎      | 29/89 [00:02<00:04, 13.07it/s, scatter Inventory Level, Units Sold]
+Summarize dataset:  34%|███▎      | 30/89 [00:02<00:04, 13.74it/s, scatter Inventory Level, Units Sold]
+Summarize dataset:  34%|███▎      | 30/89 [00:02<00:04, 13.74it/s, scatter Units Sold, Units Sold]     
+Summarize dataset:  35%|███▍      | 31/89 [00:02<00:04, 13.74it/s, scatter Units Ordered, Units Sold]
+Summarize dataset:  36%|███▌      | 32/89 [00:02<00:03, 14.41it/s, scatter Units Ordered, Units Sold]
+Summarize dataset:  36%|███▌      | 32/89 [00:02<00:03, 14.41it/s, scatter Demand Forecast, Units Sold]
+Summarize dataset:  37%|███▋      | 33/89 [00:02<00:03, 14.41it/s, scatter Price, Units Sold]          
+Summarize dataset:  38%|███▊      | 34/89 [00:02<00:03, 15.16it/s, scatter Price, Units Sold]
+Summarize dataset:  38%|███▊      | 34/89 [00:02<00:03, 15.16it/s, scatter Competitor Pricing, Units Sold]
+Summarize dataset:  39%|███▉      | 35/89 [00:02<00:03, 15.16it/s, scatter Month, Units Sold]             
+Summarize dataset:  40%|████      | 36/89 [00:02<00:03, 15.97it/s, scatter Month, Units Sold]
+Summarize dataset:  40%|████      | 36/89 [00:02<00:03, 15.97it/s, scatter Day, Units Sold]  
+Summarize dataset:  42%|████▏     | 37/89 [00:02<00:03, 15.97it/s, scatter Inventory Level, Units Ordered]
+Summarize dataset:  43%|████▎     | 38/89 [00:02<00:03, 16.66it/s, scatter Inventory Level, Units Ordered]
+Summarize dataset:  43%|████▎     | 38/89 [00:02<00:03, 16.66it/s, scatter Units Sold, Units Ordered]     
+Summarize dataset:  44%|████▍     | 39/89 [00:03<00:03, 16.66it/s, scatter Units Ordered, Units Ordered]
+Summarize dataset:  45%|████▍     | 40/89 [00:03<00:02, 16.57it/s, scatter Units Ordered, Units Ordered]
+Summarize dataset:  45%|████▍     | 40/89 [00:03<00:02, 16.57it/s, scatter Demand Forecast, Units Ordered]
+Summarize dataset:  46%|████▌     | 41/89 [00:03<00:02, 16.57it/s, scatter Price, Units Ordered]          
+Summarize dataset:  47%|████▋     | 42/89 [00:03<00:02, 16.73it/s, scatter Price, Units Ordered]
+Summarize dataset:  47%|████▋     | 42/89 [00:03<00:02, 16.73it/s, scatter Competitor Pricing, Units Ordered]
+Summarize dataset:  48%|████▊     | 43/89 [00:03<00:02, 16.73it/s, scatter Month, Units Ordered]             
+Summarize dataset:  49%|████▉     | 44/89 [00:03<00:02, 16.66it/s, scatter Month, Units Ordered]
+Summarize dataset:  49%|████▉     | 44/89 [00:03<00:02, 16.66it/s, scatter Day, Units Ordered]  
+Summarize dataset:  51%|█████     | 45/89 [00:03<00:02, 16.66it/s, scatter Inventory Level, Demand Forecast]
+Summarize dataset:  52%|█████▏    | 46/89 [00:03<00:02, 16.95it/s, scatter Inventory Level, Demand Forecast]
+Summarize dataset:  52%|█████▏    | 46/89 [00:03<00:02, 16.95it/s, scatter Units Sold, Demand Forecast]     
+Summarize dataset:  53%|█████▎    | 47/89 [00:03<00:02, 16.95it/s, scatter Units Ordered, Demand Forecast]
+Summarize dataset:  54%|█████▍    | 48/89 [00:03<00:02, 17.13it/s, scatter Units Ordered, Demand Forecast]
+Summarize dataset:  54%|█████▍    | 48/89 [00:03<00:02, 17.13it/s, scatter Demand Forecast, Demand Forecast]
+Summarize dataset:  55%|█████▌    | 49/89 [00:03<00:02, 17.13it/s, scatter Price, Demand Forecast]          
+Summarize dataset:  56%|█████▌    | 50/89 [00:03<00:02, 17.54it/s, scatter Price, Demand Forecast]
+Summarize dataset:  56%|█████▌    | 50/89 [00:03<00:02, 17.54it/s, scatter Competitor Pricing, Demand Forecast]
+Summarize dataset:  57%|█████▋    | 51/89 [00:03<00:02, 17.54it/s, scatter Month, Demand Forecast]             
+Summarize dataset:  58%|█████▊    | 52/89 [00:03<00:02, 17.63it/s, scatter Month, Demand Forecast]
+Summarize dataset:  58%|█████▊    | 52/89 [00:03<00:02, 17.63it/s, scatter Day, Demand Forecast]  
+Summarize dataset:  60%|█████▉    | 53/89 [00:03<00:02, 17.63it/s, scatter Inventory Level, Price]
+Summarize dataset:  61%|██████    | 54/89 [00:03<00:01, 17.86it/s, scatter Inventory Level, Price]
+Summarize dataset:  61%|██████    | 54/89 [00:03<00:01, 17.86it/s, scatter Units Sold, Price]     
+Summarize dataset:  62%|██████▏   | 55/89 [00:03<00:01, 17.86it/s, scatter Units Ordered, Price]
+Summarize dataset:  63%|██████▎   | 56/89 [00:03<00:01, 17.55it/s, scatter Units Ordered, Price]
+Summarize dataset:  63%|██████▎   | 56/89 [00:03<00:01, 17.55it/s, scatter Demand Forecast, Price]
+Summarize dataset:  64%|██████▍   | 57/89 [00:04<00:01, 17.55it/s, scatter Price, Price]          
+Summarize dataset:  65%|██████▌   | 58/89 [00:04<00:01, 17.98it/s, scatter Price, Price]
+Summarize dataset:  65%|██████▌   | 58/89 [00:04<00:01, 17.98it/s, scatter Competitor Pricing, Price]
+Summarize dataset:  66%|██████▋   | 59/89 [00:04<00:01, 17.98it/s, scatter Month, Price]             
+Summarize dataset:  67%|██████▋   | 60/89 [00:04<00:01, 17.98it/s, scatter Day, Price]  
+Summarize dataset:  69%|██████▊   | 61/89 [00:04<00:01, 18.55it/s, scatter Day, Price]
+Summarize dataset:  69%|██████▊   | 61/89 [00:04<00:01, 18.55it/s, scatter Inventory Level, Competitor Pricing]
+Summarize dataset:  70%|██████▉   | 62/89 [00:04<00:01, 18.55it/s, scatter Units Sold, Competitor Pricing]     
+Summarize dataset:  71%|███████   | 63/89 [00:04<00:01, 18.40it/s, scatter Units Sold, Competitor Pricing]
+Summarize dataset:  71%|███████   | 63/89 [00:04<00:01, 18.40it/s, scatter Units Ordered, Competitor Pricing]
+Summarize dataset:  72%|███████▏  | 64/89 [00:04<00:01, 18.40it/s, scatter Demand Forecast, Competitor Pricing]
+Summarize dataset:  73%|███████▎  | 65/89 [00:04<00:01, 18.18it/s, scatter Demand Forecast, Competitor Pricing]
+Summarize dataset:  73%|███████▎  | 65/89 [00:04<00:01, 18.18it/s, scatter Price, Competitor Pricing]          
+Summarize dataset:  74%|███████▍  | 66/89 [00:04<00:01, 18.18it/s, scatter Competitor Pricing, Competitor Pricing]
+Summarize dataset:  75%|███████▌  | 67/89 [00:04<00:01, 18.18it/s, scatter Month, Competitor Pricing]             
+Summarize dataset:  76%|███████▋  | 68/89 [00:04<00:01, 18.74it/s, scatter Month, Competitor Pricing]
+Summarize dataset:  76%|███████▋  | 68/89 [00:04<00:01, 18.74it/s, scatter Day, Competitor Pricing]  
+Summarize dataset:  78%|███████▊  | 69/89 [00:04<00:01, 18.74it/s, scatter Inventory Level, Month] 
+Summarize dataset:  79%|███████▊  | 70/89 [00:04<00:01, 14.75it/s, scatter Inventory Level, Month]
+Summarize dataset:  79%|███████▊  | 70/89 [00:04<00:01, 14.75it/s, scatter Units Sold, Month]     
+Summarize dataset:  80%|███████▉  | 71/89 [00:04<00:01, 14.75it/s, scatter Units Ordered, Month]
+Summarize dataset:  81%|████████  | 72/89 [00:04<00:01, 14.75it/s, scatter Demand Forecast, Month]
+Summarize dataset:  82%|████████▏ | 73/89 [00:04<00:00, 16.40it/s, scatter Demand Forecast, Month]
+Summarize dataset:  82%|████████▏ | 73/89 [00:04<00:00, 16.40it/s, scatter Price, Month]          
+Summarize dataset:  83%|████████▎ | 74/89 [00:05<00:00, 16.40it/s, scatter Competitor Pricing, Month]
+Summarize dataset:  84%|████████▍ | 75/89 [00:05<00:00, 16.40it/s, scatter Month, Month]             
+Summarize dataset:  85%|████████▌ | 76/89 [00:05<00:00, 17.81it/s, scatter Month, Month]
+Summarize dataset:  85%|████████▌ | 76/89 [00:05<00:00, 17.81it/s, scatter Day, Month]  
+Summarize dataset:  87%|████████▋ | 77/89 [00:05<00:00, 17.81it/s, scatter Inventory Level, Day]
+Summarize dataset:  88%|████████▊ | 78/89 [00:05<00:00, 17.81it/s, scatter Units Sold, Day]     
+Summarize dataset:  89%|████████▉ | 79/89 [00:05<00:00, 18.42it/s, scatter Units Sold, Day]
+Summarize dataset:  89%|████████▉ | 79/89 [00:05<00:00, 18.42it/s, scatter Units Ordered, Day]
+Summarize dataset:  90%|████████▉ | 80/89 [00:05<00:00, 18.42it/s, scatter Demand Forecast, Day]
+Summarize dataset:  91%|█████████ | 81/89 [00:05<00:00, 18.50it/s, scatter Demand Forecast, Day]
+Summarize dataset:  91%|█████████ | 81/89 [00:05<00:00, 18.50it/s, scatter Price, Day]          
+Summarize dataset:  92%|█████████▏| 82/89 [00:05<00:00, 18.50it/s, scatter Competitor Pricing, Day]
+Summarize dataset:  93%|█████████▎| 83/89 [00:05<00:00, 18.83it/s, scatter Competitor Pricing, Day]
+Summarize dataset:  93%|█████████▎| 83/89 [00:05<00:00, 18.83it/s, scatter Month, Day]             
+Summarize dataset:  94%|█████████▍| 84/89 [00:05<00:00, 18.83it/s, scatter Day, Day]  
+Summarize dataset:  93%|█████████▎| 85/91 [00:05<00:00, 18.83it/s, Missing diagram bar]
+Summarize dataset:  95%|█████████▍| 86/91 [00:05<00:00, 16.60it/s, Missing diagram bar]
+Summarize dataset:  95%|█████████▍| 86/91 [00:05<00:00, 16.60it/s, Missing diagram matrix]
+Summarize dataset:  96%|█████████▌| 87/91 [00:05<00:00, 16.60it/s, Take sample]           
+Summarize dataset:  97%|█████████▋| 88/91 [00:05<00:00, 14.42it/s, Take sample]
+Summarize dataset:  97%|█████████▋| 88/91 [00:05<00:00, 14.42it/s, Detecting duplicates]
+Summarize dataset:  98%|█████████▊| 89/91 [00:05<00:00, 14.42it/s, Get alerts]          
+Summarize dataset:  99%|█████████▉| 90/91 [00:05<00:00, 14.42it/s, Get reproduction details]
+Summarize dataset: 100%|██████████| 91/91 [00:05<00:00, 14.42it/s, Completed]               
+Summarize dataset: 100%|██████████| 91/91 [00:05<00:00, 15.34it/s, Completed]
+
+Generate report structure:   0%|          | 0/1 [00:00<?, ?it/s]
+Generate report structure: 100%|██████████| 1/1 [00:02<00:00,  2.23s/it]
+Generate report structure: 100%|██████████| 1/1 [00:02<00:00,  2.23s/it]
+
+Render HTML:   0%|          | 0/1 [00:00<?, ?it/s]
+Render HTML: 100%|██████████| 1/1 [00:01<00:00,  1.01s/it]
+Render HTML: 100%|██████████| 1/1 [00:01<00:00,  1.01s/it]
+
+Export report to file:   0%|          | 0/1 [00:00<?, ?it/s]
+Export report to file: 100%|██████████| 1/1 [00:00<00:00, 16.49it/s]
+/mnt/hdd/inventory_management/scripts/llm_data_understanding.py:184: FutureWarning: 
+
+The `ci` parameter is deprecated. Use `errorbar=None` for the same effect.
+
+  sns.barplot(x='Category', y='Units Sold', data=df, estimator=sum, ci=None)
+/mnt/hdd/inventory_management/scripts/llm_data_understanding.py:211: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
+  monthly_sales = df.groupby(pd.Grouper(key='Date', freq='M'))['Units Sold'].sum().reset_index()
+
+
+==================================================
+RUNNING: scripts/eda_seasonality.py
+TIME: 2025-03-21 13:25:17
+==================================================
+
+STDOUT:
+Loading data...
+Creating output directories...
+Analyzing category seasonality...
+Analyzing product seasonality...
+Analyzing region seasonality...
+Analyzing overall seasonality...
+Saving JSON results...
+Generating summary report...
+Analysis complete! Results saved to output/seasonality_analysis
+
+STDERR:
+/mnt/hdd/inventory_management/scripts/eda_seasonality.py:50: FutureWarning: The default of observed=False is deprecated and will be changed to True in a future version of pandas. Pass observed=False to retain current behavior or observed=True to adopt the future default and silence this warning.
+  monthly_cat = df.groupby(['MonthName', 'Category'])['Units Sold'].mean().unstack()
+/mnt/hdd/inventory_management/scripts/eda_seasonality.py:109: FutureWarning: The default of observed=False is deprecated and will be changed to True in a future version of pandas. Pass observed=False to retain current behavior or observed=True to adopt the future default and silence this warning.
+  monthly_product = top_products_df.groupby(['MonthName', 'Product ID'])['Units Sold'].mean().unstack()
+/mnt/hdd/inventory_management/scripts/eda_seasonality.py:158: FutureWarning: The default of observed=False is deprecated and will be changed to True in a future version of pandas. Pass observed=False to retain current behavior or observed=True to adopt the future default and silence this warning.
+  monthly_region = df.groupby(['MonthName', 'Region'])['Units Sold'].mean().unstack()
+/mnt/hdd/inventory_management/scripts/eda_seasonality.py:215: FutureWarning: The default of observed=False is deprecated and will be changed to True in a future version of pandas. Pass observed=False to retain current behavior or observed=True to adopt the future default and silence this warning.
+  monthly_sales = df.groupby('MonthName')['Units Sold'].mean()
+/mnt/hdd/inventory_management/scripts/eda_seasonality.py:264: FutureWarning: The default of observed=False is deprecated and will be changed to True in a future version of pandas. Pass observed=False to retain current behavior or observed=True to adopt the future default and silence this warning.
+  yearly_monthly_sales = df.groupby(['Year', 'MonthName'])['Units Sold'].mean().unstack(0)
+
+
+==================================================
+RUNNING: scripts/eda_supply_analysis.py
+TIME: 2025-03-21 13:25:21
+==================================================
+
+STDOUT:
+Loading data...
+Creating output directories...
+Analyzing overall supply levels...
+Analyzing supply by category...
+Analyzing supply by product...
+Analyzing supply by store...
+Generating recommendations...
+Saving JSON results...
+Analysis complete! Results saved to output/supply_analysis
+
+STDERR:
+
+
+==================================================
+RUNNING: scripts/forecast_model.py
+TIME: 2025-03-21 13:25:25
+==================================================
+
+STDOUT:
+
+STDERR:
+Traceback (most recent call last):
+  File "/mnt/hdd/inventory_management/scripts/forecast_model.py", line 14, in <module>
+    from pmdarima import auto_arima
+ModuleNotFoundError: No module named 'pmdarima'

@@ -1,0 +1,607 @@
+{
+    "elasticity_analysis": {
+        "product_elasticity": {
+            "P0001": {
+                "elasticity": 0.021319192188545725,
+                "elastic_status": "Inelastic",
+                "category": "Groceries",
+                "avg_price": 54.69492497499166
+            },
+            "P0002": {
+                "elasticity": -0.014033313971383006,
+                "elastic_status": "Inelastic",
+                "category": "Toys",
+                "avg_price": 55.010238252812705
+            },
+            "P0003": {
+                "elasticity": -0.04395495444722011,
+                "elastic_status": "Inelastic",
+                "category": "Toys",
+                "avg_price": 54.93753346720214
+            },
+            "P0004": {
+                "elasticity": -0.0021279479556091624,
+                "elastic_status": "Inelastic",
+                "category": "Toys",
+                "avg_price": 55.57831237590999
+            },
+            "P0005": {
+                "elasticity": 0.015046701558778275,
+                "elastic_status": "Inelastic",
+                "category": "Electronics",
+                "avg_price": 55.48744744744745
+            },
+            "P0006": {
+                "elasticity": -0.02307225934751261,
+                "elastic_status": "Inelastic",
+                "category": "Groceries",
+                "avg_price": 55.075315911346344
+            },
+            "P0007": {
+                "elasticity": 0.05498114652494122,
+                "elastic_status": "Inelastic",
+                "category": "Furniture",
+                "avg_price": 54.917148123324395
+            },
+            "P0008": {
+                "elasticity": -0.0210477265859711,
+                "elastic_status": "Inelastic",
+                "category": "Clothing",
+                "avg_price": 55.411715048381716
+            },
+            "P0009": {
+                "elasticity": 0.018846405913143988,
+                "elastic_status": "Inelastic",
+                "category": "Electronics",
+                "avg_price": 55.201033565968764
+            },
+            "P0010": {
+                "elasticity": -0.031301923459368323,
+                "elastic_status": "Inelastic",
+                "category": "Toys",
+                "avg_price": 55.05058226134055
+            },
+            "P0011": {
+                "elasticity": 0.011093648296278158,
+                "elastic_status": "Inelastic",
+                "category": "Furniture",
+                "avg_price": 56.09711178045516
+            },
+            "P0012": {
+                "elasticity": -0.004766698289911144,
+                "elastic_status": "Inelastic",
+                "category": "Clothing",
+                "avg_price": 55.12910897648228
+            },
+            "P0013": {
+                "elasticity": 0.03229433052581752,
+                "elastic_status": "Inelastic",
+                "category": "Toys",
+                "avg_price": 54.87319771351714
+            },
+            "P0014": {
+                "elasticity": -0.0035312732255263204,
+                "elastic_status": "Inelastic",
+                "category": "Clothing",
+                "avg_price": 55.64893203883495
+            },
+            "P0015": {
+                "elasticity": 0.0351159650885185,
+                "elastic_status": "Inelastic",
+                "category": "Clothing",
+                "avg_price": 54.630277128547576
+            },
+            "P0016": {
+                "elasticity": 0.0095381658574627,
+                "elastic_status": "Inelastic",
+                "category": "Electronics",
+                "avg_price": 55.00175588135015
+            },
+            "P0017": {
+                "elasticity": -0.07680025195711487,
+                "elastic_status": "Inelastic",
+                "category": "Toys",
+                "avg_price": 54.94164548494984
+            },
+            "P0018": {
+                "elasticity": 0.048961801455566195,
+                "elastic_status": "Inelastic",
+                "category": "Clothing",
+                "avg_price": 54.777332231404955
+            },
+            "P0019": {
+                "elasticity": -0.00835262807300874,
+                "elastic_status": "Inelastic",
+                "category": "Clothing",
+                "avg_price": 54.753466400532275
+            },
+            "P0020": {
+                "elasticity": 0.017020927572220207,
+                "elastic_status": "Inelastic",
+                "category": "Toys",
+                "avg_price": 55.44504507512521
+            }
+        },
+        "category_elasticity": {
+            "Groceries": {
+                "elasticity": -0.0008765335794834427,
+                "elastic_status": "Inelastic",
+                "products_analyzed": 2
+            },
+            "Toys": {
+                "elasticity": -0.014033313971383006,
+                "elastic_status": "Inelastic",
+                "products_analyzed": 7
+            },
+            "Electronics": {
+                "elasticity": 0.015046701558778275,
+                "elastic_status": "Inelastic",
+                "products_analyzed": 3
+            },
+            "Furniture": {
+                "elasticity": 0.03303739741060969,
+                "elastic_status": "Inelastic",
+                "products_analyzed": 2
+            },
+            "Clothing": {
+                "elasticity": -0.004148985757718732,
+                "elastic_status": "Inelastic",
+                "products_analyzed": 6
+            }
+        },
+        "analysis_summary": {
+            "products_analyzed": 20,
+            "elastic_products": 0,
+            "inelastic_products": 20
+        }
+    },
+    "discount_analysis": {
+        "discount_impact_sales": [
+            {
+                "Discount": 0,
+                "Units Sold": 135.69458464056746
+            },
+            {
+                "Discount": 5,
+                "Units Sold": 136.56740456445755
+            },
+            {
+                "Discount": 10,
+                "Units Sold": 136.76985111662532
+            },
+            {
+                "Discount": 15,
+                "Units Sold": 136.65529266958424
+            },
+            {
+                "Discount": 20,
+                "Units Sold": 136.6407747196738
+            }
+        ],
+        "discount_impact_revenue": [
+            {
+                "Discount": 0,
+                "Revenue": 7465.530608375392
+            },
+            {
+                "Discount": 5,
+                "Revenue": 7172.552637721883
+            },
+            {
+                "Discount": 10,
+                "Revenue": 6734.851936724566
+            },
+            {
+                "Discount": 15,
+                "Revenue": 6411.42604961023
+            },
+            {
+                "Discount": 20,
+                "Revenue": 6074.558150458715
+            }
+        ],
+        "optimal_discount": {
+            "discount": 0.0,
+            "revenue": 7465.530608375392
+        },
+        "category_discount": {
+            "Groceries": {
+                "optimal_discount": 0.0,
+                "max_revenue": 7789.7679979570985,
+                "revenue_by_discount": [
+                    {
+                        "Discount": 0,
+                        "Revenue": 7789.7679979570985
+                    },
+                    {
+                        "Discount": 5,
+                        "Revenue": 7146.293877482329
+                    },
+                    {
+                        "Discount": 10,
+                        "Revenue": 6662.200223149113
+                    },
+                    {
+                        "Discount": 15,
+                        "Revenue": 6516.453891108023
+                    },
+                    {
+                        "Discount": 20,
+                        "Revenue": 6077.624637936886
+                    }
+                ]
+            },
+            "Toys": {
+                "optimal_discount": 0.0,
+                "max_revenue": 7566.143572152754,
+                "revenue_by_discount": [
+                    {
+                        "Discount": 0,
+                        "Revenue": 7566.143572152754
+                    },
+                    {
+                        "Discount": 5,
+                        "Revenue": 7163.749306317251
+                    },
+                    {
+                        "Discount": 10,
+                        "Revenue": 6682.372839103869
+                    },
+                    {
+                        "Discount": 15,
+                        "Revenue": 6326.470961302421
+                    },
+                    {
+                        "Discount": 20,
+                        "Revenue": 5971.418046511628
+                    }
+                ]
+            },
+            "Electronics": {
+                "optimal_discount": 5.0,
+                "max_revenue": 7164.531772297298,
+                "revenue_by_discount": [
+                    {
+                        "Discount": 0,
+                        "Revenue": 7150.373628808864
+                    },
+                    {
+                        "Discount": 5,
+                        "Revenue": 7164.531772297298
+                    },
+                    {
+                        "Discount": 10,
+                        "Revenue": 6701.003895386851
+                    },
+                    {
+                        "Discount": 15,
+                        "Revenue": 6299.070357118928
+                    },
+                    {
+                        "Discount": 20,
+                        "Revenue": 6227.497142078364
+                    }
+                ]
+            },
+            "Furniture": {
+                "optimal_discount": 0.0,
+                "max_revenue": 7510.61678717599,
+                "revenue_by_discount": [
+                    {
+                        "Discount": 0,
+                        "Revenue": 7510.61678717599
+                    },
+                    {
+                        "Discount": 5,
+                        "Revenue": 7042.88210647986
+                    },
+                    {
+                        "Discount": 10,
+                        "Revenue": 6835.414183098592
+                    },
+                    {
+                        "Discount": 15,
+                        "Revenue": 6572.865600309703
+                    },
+                    {
+                        "Discount": 20,
+                        "Revenue": 6140.535141212326
+                    }
+                ]
+            },
+            "Clothing": {
+                "optimal_discount": 5.0,
+                "max_revenue": 7342.637556600547,
+                "revenue_by_discount": [
+                    {
+                        "Discount": 0,
+                        "Revenue": 7305.307155465037
+                    },
+                    {
+                        "Discount": 5,
+                        "Revenue": 7342.637556600547
+                    },
+                    {
+                        "Discount": 10,
+                        "Revenue": 6786.880252518236
+                    },
+                    {
+                        "Discount": 15,
+                        "Revenue": 6347.419382745636
+                    },
+                    {
+                        "Discount": 20,
+                        "Revenue": 5955.762051420839
+                    }
+                ]
+            }
+        }
+    },
+    "competitive_pricing": {
+        "price_diff_impact": [
+            {
+                "Price_Diff_Bucket": "<-10%",
+                "Units Sold": 135.41401747536716
+            },
+            {
+                "Price_Diff_Bucket": "-10% to -5%",
+                "Units Sold": 137.20989371212875
+            },
+            {
+                "Price_Diff_Bucket": "-5% to -2%",
+                "Units Sold": 137.21646736232768
+            },
+            {
+                "Price_Diff_Bucket": "-2% to 0%",
+                "Units Sold": 136.86985275767407
+            },
+            {
+                "Price_Diff_Bucket": "0% to 2%",
+                "Units Sold": 136.49328944036466
+            },
+            {
+                "Price_Diff_Bucket": "2% to 5%",
+                "Units Sold": 136.15183522577237
+            },
+            {
+                "Price_Diff_Bucket": "5% to 10%",
+                "Units Sold": 135.68385989704248
+            },
+            {
+                "Price_Diff_Bucket": ">10%",
+                "Units Sold": 135.9350578624915
+            }
+        ],
+        "revenue_by_diff": [
+            {
+                "Price_Diff_Bucket": "<-10%",
+                "Revenue": 2636.4158959843835
+            },
+            {
+                "Price_Diff_Bucket": "-10% to -5%",
+                "Revenue": 5868.710021356908
+            },
+            {
+                "Price_Diff_Bucket": "-5% to -2%",
+                "Revenue": 8257.244774925737
+            },
+            {
+                "Price_Diff_Bucket": "-2% to 0%",
+                "Revenue": 8352.649549787871
+            },
+            {
+                "Price_Diff_Bucket": "0% to 2%",
+                "Revenue": 8208.22556077488
+            },
+            {
+                "Price_Diff_Bucket": "2% to 5%",
+                "Revenue": 8259.737065091102
+            },
+            {
+                "Price_Diff_Bucket": "5% to 10%",
+                "Revenue": 6583.442076208741
+            },
+            {
+                "Price_Diff_Bucket": ">10%",
+                "Revenue": 3059.5903325391423
+            }
+        ],
+        "optimal_diff": {
+            "price_diff": "-2% to 0%",
+            "revenue": 8352.649549787871
+        },
+        "category_competition": {
+            "Groceries": {
+                "optimal_diff": "-2% to 0%",
+                "max_revenue": 8505.255002265372,
+                "revenue_by_diff": [
+                    {
+                        "Price_Diff_Bucket": "<-10%",
+                        "Revenue": 2591.319575715605
+                    },
+                    {
+                        "Price_Diff_Bucket": "-10% to -5%",
+                        "Revenue": 6003.7523208007815
+                    },
+                    {
+                        "Price_Diff_Bucket": "-5% to -2%",
+                        "Revenue": 8374.330396283654
+                    },
+                    {
+                        "Price_Diff_Bucket": "-2% to 0%",
+                        "Revenue": 8505.255002265372
+                    },
+                    {
+                        "Price_Diff_Bucket": "0% to 2%",
+                        "Revenue": 8012.354379006913
+                    },
+                    {
+                        "Price_Diff_Bucket": "2% to 5%",
+                        "Revenue": 8381.403167985929
+                    },
+                    {
+                        "Price_Diff_Bucket": "5% to 10%",
+                        "Revenue": 6769.684808933002
+                    },
+                    {
+                        "Price_Diff_Bucket": ">10%",
+                        "Revenue": 2944.4814700282086
+                    }
+                ]
+            },
+            "Toys": {
+                "optimal_diff": "0% to 2%",
+                "max_revenue": 8464.088634285714,
+                "revenue_by_diff": [
+                    {
+                        "Price_Diff_Bucket": "<-10%",
+                        "Revenue": 2612.2547670777985
+                    },
+                    {
+                        "Price_Diff_Bucket": "-10% to -5%",
+                        "Revenue": 5826.591422474748
+                    },
+                    {
+                        "Price_Diff_Bucket": "-5% to -2%",
+                        "Revenue": 8167.563505822981
+                    },
+                    {
+                        "Price_Diff_Bucket": "-2% to 0%",
+                        "Revenue": 8208.58384288299
+                    },
+                    {
+                        "Price_Diff_Bucket": "0% to 2%",
+                        "Revenue": 8464.088634285714
+                    },
+                    {
+                        "Price_Diff_Bucket": "2% to 5%",
+                        "Revenue": 8324.932654372791
+                    },
+                    {
+                        "Price_Diff_Bucket": "5% to 10%",
+                        "Revenue": 6456.39300720676
+                    },
+                    {
+                        "Price_Diff_Bucket": ">10%",
+                        "Revenue": 3032.102139435696
+                    }
+                ]
+            },
+            "Electronics": {
+                "optimal_diff": "-5% to -2%",
+                "max_revenue": 8186.294595801526,
+                "revenue_by_diff": [
+                    {
+                        "Price_Diff_Bucket": "<-10%",
+                        "Revenue": 2670.0919453201973
+                    },
+                    {
+                        "Price_Diff_Bucket": "-10% to -5%",
+                        "Revenue": 5772.946690300345
+                    },
+                    {
+                        "Price_Diff_Bucket": "-5% to -2%",
+                        "Revenue": 8186.294595801526
+                    },
+                    {
+                        "Price_Diff_Bucket": "-2% to 0%",
+                        "Revenue": 8149.645832697201
+                    },
+                    {
+                        "Price_Diff_Bucket": "0% to 2%",
+                        "Revenue": 8132.123498734178
+                    },
+                    {
+                        "Price_Diff_Bucket": "2% to 5%",
+                        "Revenue": 8012.824611914149
+                    },
+                    {
+                        "Price_Diff_Bucket": "5% to 10%",
+                        "Revenue": 6526.880322177822
+                    },
+                    {
+                        "Price_Diff_Bucket": ">10%",
+                        "Revenue": 3161.0752281382224
+                    }
+                ]
+            },
+            "Furniture": {
+                "optimal_diff": "-2% to 0%",
+                "max_revenue": 8408.924337468983,
+                "revenue_by_diff": [
+                    {
+                        "Price_Diff_Bucket": "<-10%",
+                        "Revenue": 2713.667399283796
+                    },
+                    {
+                        "Price_Diff_Bucket": "-10% to -5%",
+                        "Revenue": 5917.54142275
+                    },
+                    {
+                        "Price_Diff_Bucket": "-5% to -2%",
+                        "Revenue": 8347.620934121622
+                    },
+                    {
+                        "Price_Diff_Bucket": "-2% to 0%",
+                        "Revenue": 8408.924337468983
+                    },
+                    {
+                        "Price_Diff_Bucket": "0% to 2%",
+                        "Revenue": 8399.981560897435
+                    },
+                    {
+                        "Price_Diff_Bucket": "2% to 5%",
+                        "Revenue": 8266.246051890941
+                    },
+                    {
+                        "Price_Diff_Bucket": "5% to 10%",
+                        "Revenue": 6584.018871231477
+                    },
+                    {
+                        "Price_Diff_Bucket": ">10%",
+                        "Revenue": 3158.4071435643564
+                    }
+                ]
+            },
+            "Clothing": {
+                "optimal_diff": "-2% to 0%",
+                "max_revenue": 8494.931297480025,
+                "revenue_by_diff": [
+                    {
+                        "Price_Diff_Bucket": "<-10%",
+                        "Revenue": 2594.824927927928
+                    },
+                    {
+                        "Price_Diff_Bucket": "-10% to -5%",
+                        "Revenue": 5820.732291832669
+                    },
+                    {
+                        "Price_Diff_Bucket": "-5% to -2%",
+                        "Revenue": 8206.861624050152
+                    },
+                    {
+                        "Price_Diff_Bucket": "-2% to 0%",
+                        "Revenue": 8494.931297480025
+                    },
+                    {
+                        "Price_Diff_Bucket": "0% to 2%",
+                        "Revenue": 8038.469660804019
+                    },
+                    {
+                        "Price_Diff_Bucket": "2% to 5%",
+                        "Revenue": 8314.73625419241
+                    },
+                    {
+                        "Price_Diff_Bucket": "5% to 10%",
+                        "Revenue": 6579.512593701198
+                    },
+                    {
+                        "Price_Diff_Bucket": ">10%",
+                        "Revenue": 2999.38851122449
+                    }
+                ]
+            }
+        }
+    },
+    "analysis_date": "2025-03-21 15:51:10"
+}

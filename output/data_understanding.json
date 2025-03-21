@@ -1,0 +1,512 @@
+{
+    "basic_info": {
+        "num_rows": 73100,
+        "num_columns": 15,
+        "column_names": [
+            "Date",
+            "Store ID",
+            "Product ID",
+            "Category",
+            "Region",
+            "Inventory Level",
+            "Units Sold",
+            "Units Ordered",
+            "Demand Forecast",
+            "Price",
+            "Discount",
+            "Weather Condition",
+            "Holiday/Promotion",
+            "Competitor Pricing",
+            "Seasonality"
+        ],
+        "column_dtypes": {
+            "Date": "object",
+            "Store ID": "object",
+            "Product ID": "object",
+            "Category": "object",
+            "Region": "object",
+            "Inventory Level": "int64",
+            "Units Sold": "int64",
+            "Units Ordered": "int64",
+            "Demand Forecast": "float64",
+            "Price": "float64",
+            "Discount": "int64",
+            "Weather Condition": "object",
+            "Holiday/Promotion": "int64",
+            "Competitor Pricing": "float64",
+            "Seasonality": "object"
+        },
+        "missing_values": {
+            "Date": 0,
+            "Store ID": 0,
+            "Product ID": 0,
+            "Category": 0,
+            "Region": 0,
+            "Inventory Level": 0,
+            "Units Sold": 0,
+            "Units Ordered": 0,
+            "Demand Forecast": 0,
+            "Price": 0,
+            "Discount": 0,
+            "Weather Condition": 0,
+            "Holiday/Promotion": 0,
+            "Competitor Pricing": 0,
+            "Seasonality": 0
+        },
+        "duplicated_rows": 0
+    },
+    "temporal_info": {
+        "min_date": "2022-01-01",
+        "max_date": "2024-01-01",
+        "date_range_days": 731,
+        "unique_dates": 731,
+        "monthly_distribution": {
+            "2022-01": 3100,
+            "2022-02": 2800,
+            "2022-03": 3100,
+            "2022-04": 3000,
+            "2022-05": 3100,
+            "2022-06": 3000,
+            "2022-07": 3100,
+            "2022-08": 3100,
+            "2022-09": 3000,
+            "2022-10": 3100,
+            "2022-11": 3000,
+            "2022-12": 3100,
+            "2023-01": 3100,
+            "2023-02": 2800,
+            "2023-03": 3100,
+            "2023-04": 3000,
+            "2023-05": 3100,
+            "2023-06": 3000,
+            "2023-07": 3100,
+            "2023-08": 3100,
+            "2023-09": 3000,
+            "2023-10": 3100,
+            "2023-11": 3000,
+            "2023-12": 3100,
+            "2024-01": 100
+        }
+    },
+    "categorical_info": {
+        "Store ID": {
+            "unique_values": 5,
+            "top_values": {
+                "S001": 14620,
+                "S002": 14620,
+                "S003": 14620,
+                "S004": 14620,
+                "S005": 14620
+            }
+        },
+        "Product ID": {
+            "unique_values": 20,
+            "top_values": {
+                "P0001": 3655,
+                "P0002": 3655,
+                "P0003": 3655,
+                "P0004": 3655,
+                "P0005": 3655,
+                "P0006": 3655,
+                "P0007": 3655,
+                "P0008": 3655,
+                "P0009": 3655,
+                "P0010": 3655
+            }
+        },
+        "Category": {
+            "unique_values": 5,
+            "top_values": {
+                "Furniture": 14699,
+                "Toys": 14643,
+                "Clothing": 14626,
+                "Groceries": 14611,
+                "Electronics": 14521
+            }
+        },
+        "Region": {
+            "unique_values": 4,
+            "top_values": {
+                "East": 18349,
+                "South": 18297,
+                "North": 18228,
+                "West": 18226
+            }
+        },
+        "Weather Condition": {
+            "unique_values": 4,
+            "top_values": {
+                "Sunny": 18290,
+                "Rainy": 18278,
+                "Snowy": 18272,
+                "Cloudy": 18260
+            }
+        },
+        "Holiday/Promotion": {
+            "unique_values": 2,
+            "top_values": {
+                "0": 36747,
+                "1": 36353
+            }
+        },
+        "Seasonality": {
+            "unique_values": 4,
+            "top_values": {
+                "Spring": 18317,
+                "Summer": 18305,
+                "Winter": 18285,
+                "Autumn": 18193
+            }
+        }
+    },
+    "numerical_info": {
+        "Inventory Level": {
+            "min": 50.0,
+            "max": 500.0,
+            "mean": 274.46987688098494,
+            "median": 273.0,
+            "std": 129.94951411270208,
+            "range": 450.0
+        },
+        "Units Sold": {
+            "min": 0.0,
+            "max": 499.0,
+            "mean": 136.46487004103966,
+            "median": 107.0,
+            "std": 108.91940620568285,
+            "range": 499.0
+        },
+        "Units Ordered": {
+            "min": 20.0,
+            "max": 200.0,
+            "mean": 110.00447332421341,
+            "median": 110.0,
+            "std": 52.277448359313965,
+            "range": 180.0
+        },
+        "Demand Forecast": {
+            "min": -9.99,
+            "max": 518.55,
+            "mean": 141.49472010943916,
+            "median": 113.015,
+            "std": 109.2540764703911,
+            "range": 528.54
+        },
+        "Price": {
+            "min": 10.0,
+            "max": 100.0,
+            "mean": 55.13510820793434,
+            "median": 55.05,
+            "std": 26.021944625625636,
+            "range": 90.0
+        },
+        "Discount": {
+            "min": 0.0,
+            "max": 20.0,
+            "mean": 10.009507523939808,
+            "median": 10.0,
+            "std": 7.083746228204518,
+            "range": 20.0
+        },
+        "Competitor Pricing": {
+            "min": 5.03,
+            "max": 104.94,
+            "mean": 55.14607742818057,
+            "median": 55.01,
+            "std": 26.191407869096334,
+            "range": 99.91
+        }
+    },
+    "relationship_info": {
+        "correlation_matrix": {
+            "Inventory Level": {
+                "Inventory Level": 1.0,
+                "Units Sold": 0.59,
+                "Units Ordered": 0.0,
+                "Demand Forecast": 0.59,
+                "Price": 0.01,
+                "Discount": 0.0,
+                "Competitor Pricing": 0.01
+            },
+            "Units Sold": {
+                "Inventory Level": 0.59,
+                "Units Sold": 1.0,
+                "Units Ordered": -0.0,
+                "Demand Forecast": 1.0,
+                "Price": 0.0,
+                "Discount": 0.0,
+                "Competitor Pricing": 0.0
+            },
+            "Units Ordered": {
+                "Inventory Level": 0.0,
+                "Units Sold": -0.0,
+                "Units Ordered": 1.0,
+                "Demand Forecast": -0.0,
+                "Price": 0.0,
+                "Discount": -0.0,
+                "Competitor Pricing": 0.0
+            },
+            "Demand Forecast": {
+                "Inventory Level": 0.59,
+                "Units Sold": 1.0,
+                "Units Ordered": -0.0,
+                "Demand Forecast": 1.0,
+                "Price": 0.0,
+                "Discount": 0.0,
+                "Competitor Pricing": 0.0
+            },
+            "Price": {
+                "Inventory Level": 0.01,
+                "Units Sold": 0.0,
+                "Units Ordered": 0.0,
+                "Demand Forecast": 0.0,
+                "Price": 1.0,
+                "Discount": 0.0,
+                "Competitor Pricing": 0.99
+            },
+            "Discount": {
+                "Inventory Level": 0.0,
+                "Units Sold": 0.0,
+                "Units Ordered": -0.0,
+                "Demand Forecast": 0.0,
+                "Price": 0.0,
+                "Discount": 1.0,
+                "Competitor Pricing": 0.0
+            },
+            "Competitor Pricing": {
+                "Inventory Level": 0.01,
+                "Units Sold": 0.0,
+                "Units Ordered": 0.0,
+                "Demand Forecast": 0.0,
+                "Price": 0.99,
+                "Discount": 0.0,
+                "Competitor Pricing": 1.0
+            }
+        },
+        "category_stats": {
+            "Inventory Level": {
+                "Clothing": 274.6,
+                "Electronics": 272.51,
+                "Furniture": 275.82,
+                "Groceries": 275.76,
+                "Toys": 273.65
+            },
+            "Units Sold": {
+                "Clothing": 136.69,
+                "Electronics": 135.01,
+                "Furniture": 137.77,
+                "Groceries": 136.92,
+                "Toys": 135.93
+            },
+            "Units Ordered": {
+                "Clothing": 110.41,
+                "Electronics": 109.66,
+                "Furniture": 110.06,
+                "Groceries": 109.93,
+                "Toys": 109.97
+            },
+            "Demand Forecast": {
+                "Clothing": 141.75,
+                "Electronics": 140.0,
+                "Furniture": 142.82,
+                "Groceries": 141.87,
+                "Toys": 141.01
+            },
+            "Price": {
+                "Clothing": 54.89,
+                "Electronics": 55.31,
+                "Furniture": 55.18,
+                "Groceries": 55.27,
+                "Toys": 55.03
+            },
+            "Discount": {
+                "Clothing": 10.01,
+                "Electronics": 10.04,
+                "Furniture": 10.03,
+                "Groceries": 9.98,
+                "Toys": 9.99
+            },
+            "Competitor Pricing": {
+                "Clothing": 54.92,
+                "Electronics": 55.3,
+                "Furniture": 55.2,
+                "Groceries": 55.31,
+                "Toys": 55.01
+            }
+        },
+        "region_stats": {
+            "Inventory Level": {
+                "East": 275.29,
+                "North": 274.8,
+                "South": 275.31,
+                "West": 272.47
+            },
+            "Units Sold": {
+                "East": 136.86,
+                "North": 136.33,
+                "South": 137.06,
+                "West": 135.61
+            },
+            "Units Ordered": {
+                "East": 109.97,
+                "North": 109.59,
+                "South": 110.17,
+                "West": 110.28
+            },
+            "Demand Forecast": {
+                "East": 141.76,
+                "North": 141.35,
+                "South": 142.18,
+                "West": 140.68
+            },
+            "Price": {
+                "East": 55.18,
+                "North": 55.32,
+                "South": 55.04,
+                "West": 55.0
+            },
+            "Discount": {
+                "East": 10.04,
+                "North": 10.01,
+                "South": 9.99,
+                "West": 9.99
+            },
+            "Competitor Pricing": {
+                "East": 55.19,
+                "North": 55.34,
+                "South": 55.03,
+                "West": 55.03
+            }
+        },
+        "seasonality_stats": {
+            "Inventory Level": {
+                "Autumn": 275.42,
+                "Spring": 274.74,
+                "Summer": 273.07,
+                "Winter": 274.65
+            },
+            "Units Sold": {
+                "Autumn": 137.78,
+                "Spring": 135.83,
+                "Summer": 135.43,
+                "Winter": 136.83
+            },
+            "Units Ordered": {
+                "Autumn": 109.77,
+                "Spring": 109.75,
+                "Summer": 110.4,
+                "Winter": 110.1
+            },
+            "Demand Forecast": {
+                "Autumn": 142.8,
+                "Spring": 140.81,
+                "Summer": 140.47,
+                "Winter": 141.9
+            },
+            "Price": {
+                "Autumn": 54.92,
+                "Spring": 55.18,
+                "Summer": 55.09,
+                "Winter": 55.35
+            },
+            "Discount": {
+                "Autumn": 10.05,
+                "Spring": 10.04,
+                "Summer": 9.97,
+                "Winter": 9.97
+            },
+            "Competitor Pricing": {
+                "Autumn": 54.95,
+                "Spring": 55.19,
+                "Summer": 55.08,
+                "Winter": 55.37
+            }
+        },
+        "weather_stats": {
+            "Inventory Level": {
+                "Cloudy": 274.83,
+                "Rainy": 273.88,
+                "Snowy": 273.45,
+                "Sunny": 275.71
+            },
+            "Units Sold": {
+                "Cloudy": 136.76,
+                "Rainy": 135.16,
+                "Snowy": 135.91,
+                "Sunny": 138.03
+            },
+            "Units Ordered": {
+                "Cloudy": 110.14,
+                "Rainy": 109.65,
+                "Snowy": 110.55,
+                "Sunny": 109.68
+            },
+            "Demand Forecast": {
+                "Cloudy": 141.76,
+                "Rainy": 140.21,
+                "Snowy": 140.94,
+                "Sunny": 143.07
+            },
+            "Price": {
+                "Cloudy": 55.51,
+                "Rainy": 55.13,
+                "Snowy": 54.94,
+                "Sunny": 54.97
+            },
+            "Discount": {
+                "Cloudy": 10.05,
+                "Rainy": 9.96,
+                "Snowy": 10.05,
+                "Sunny": 9.98
+            },
+            "Competitor Pricing": {
+                "Cloudy": 55.5,
+                "Rainy": 55.13,
+                "Snowy": 54.97,
+                "Sunny": 54.98
+            }
+        },
+        "holiday_stats": {
+            "Inventory Level": {
+                "0": 274.03,
+                "1": 274.92
+            },
+            "Units Sold": {
+                "0": 136.51,
+                "1": 136.42
+            },
+            "Units Ordered": {
+                "0": 109.72,
+                "1": 110.29
+            },
+            "Demand Forecast": {
+                "0": 141.55,
+                "1": 141.44
+            },
+            "Price": {
+                "0": 55.08,
+                "1": 55.2
+            },
+            "Discount": {
+                "0": 10.02,
+                "1": 10.0
+            },
+            "Competitor Pricing": {
+                "0": 55.1,
+                "1": 55.2
+            }
+        }
+    },
+    "insights": [
+        "Top 5 products by units sold: {'P0016': 508472, 'P0020': 507708, 'P0014': 507622, 'P0015': 507283, 'P0005': 503648}",
+        "Top 5 stores by units sold: {'S003': 2022696, 'S005': 2010176, 'S002': 1987715, 'S004': 1979245, 'S001': 1975750}",
+        "Category sales performance: {'Furniture': 2025017, 'Groceries': 2000482, 'Clothing': 1999166, 'Toys': 1990485, 'Electronics': 1960432}",
+        "Average units sold by discount level: {0: 135.69, 5: 136.57, 10: 136.77, 15: 136.66, 20: 136.64}",
+        "Correlation between Price and Units Sold: 0.001",
+        "Average units sold by season: {'Autumn': 137.78, 'Spring': 135.83, 'Summer': 135.43, 'Winter': 136.83}",
+        "Average units sold by weather condition: {'Cloudy': 136.76, 'Rainy': 135.16, 'Snowy': 135.91, 'Sunny': 138.03}",
+        "Average inventory to sales ratio: inf",
+        "Average forecast accuracy: 0.854"
+    ],
+    "analysis_date": "2025-03-21 13:34:17"
+}

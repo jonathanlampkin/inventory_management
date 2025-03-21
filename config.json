@@ -1,0 +1,49 @@
+{
+  "data": {
+    "path": "data/retail_store_inventory.csv",
+    "date_column": "Date",
+    "train_test_split": 0.8
+  },
+  "eda": {
+    "output_dir": "output/eda",
+    "supply_analysis": {
+      "optimal_inventory_factor": 1.5,
+      "significant_undersupply_threshold": -10
+    },
+    "seasonality_analysis": {
+      "significant_seasonality_threshold": 0.3
+    }
+  },
+  "forecasting": {
+    "output_dir": "output/forecasting",
+    "forecast_horizon_days": 30,
+    "sarima_params": {
+      "order": [1, 1, 1],
+      "seasonal_order": [1, 1, 0, 7]
+    },
+    "ml_model": {
+      "n_estimators": 100,
+      "max_depth": 15,
+      "min_samples_split": 5
+    },
+    "use_prophet": true
+  },
+  "inventory_optimization": {
+    "output_dir": "output/inventory_optimization",
+    "lead_time_days": 7,
+    "service_level": 0.95,
+    "ordering_cost": 50,
+    "holding_cost_pct": 0.25
+  },
+  "pricing_strategy": {
+    "output_dir": "output/pricing_strategy",
+    "elasticity_threshold": -1.0,
+    "price_diff_bins": [-100, -10, -5, -2, 0, 2, 5, 10, 100]
+  },
+  "reporting": {
+    "output_dir": "output/final_report",
+    "generate_html": true,
+    "generate_markdown": true,
+    "include_visualizations": true
+  }
+} 
