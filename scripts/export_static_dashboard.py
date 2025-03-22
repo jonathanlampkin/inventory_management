@@ -1,5 +1,8 @@
 import os
-from scripts.06_interactive_dashboard import app, load_data
+import importlib
+interactive_dashboard = importlib.import_module("scripts.06_interactive_dashboard")
+app = interactive_dashboard.app
+load_data = interactive_dashboard.load_data
 import plotly.io as pio
 from datetime import datetime
 import plotly.express as px
@@ -10,78 +13,71 @@ def generate_static_html(data):
     html_template = """
     <!DOCTYPE html>
     <html>
-    <head>
-        <title>Retail Inventory Management Dashboard</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-        <style>
-            body { background-color: #f9f9f9; color: #333333; }
-            .card { margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-            .bg-primary { background-color: #2C3E50 !important; }
-            .text-primary { color: #2C3E50 !important; }
-            .bg-success { background-color: #18BC9C !important; }
-        </style>
-    </head>
-    <body>
-        <div class="container-fluid py-4">
-            <h1 class="text-center text-primary mb-5">Retail Inventory Management Dashboard</h1>
-            
-            <!-- Overview Section -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header bg-primary text-white">
-                            <h4>Inventory Overview</h4>
-                        </div>
-                        <div class="card-body">
-                            <div id="overview-metrics" class="row text-center">
-                                <!-- Key metrics will be inserted here -->
-                                {overview_metrics}
-                            </div>
-                        </div>
+        <head>
+            <title>Retail Inventory Management Dashboard</title>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+            <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+            <style>
+                body { 
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                    background-color: #f9f9f9;
+                    color: #333333;
+                }
+                .card {
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                    transition: all 0.3s ease;
+                }
+                .card:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+                }
+                .nav-tabs .nav-link {
+                    color: #2C3E50;
+                    font-weight: 500;
+                }
+                .nav-tabs .nav-link.active {
+                    color: #18BC9C;
+                    font-weight: 600;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="container-fluid py-4">
+                <h1 class="text-center text-primary mb-5">Retail Inventory Management Dashboard</h1>
+                <p class="alert alert-info">
+                    <b>Note:</b> This is a static preview of the dashboard. To interact with all features, please run the dashboard locally using:
+                    <br><code>python scripts/06_interactive_dashboard.py</code>
+                </p>
+                
+                <div class="row">
+                    <div class="col-md-12">
+                        <img src="../visualizations/dashboard_preview.png" class="img-fluid" alt="Dashboard Preview">
+                    </div>
+                </div>
+                
+                <div class="row mt-5">
+                    <div class="col-md-12">
+                        <h3>Interactive Features</h3>
+                        <ul>
+                            <li>Filter by date range, category, store, region, and product</li>
+                            <li>Drill down into specific metrics and time periods</li>
+                            <li>View detailed inventory optimization parameters</li>
+                            <li>Compare forecast vs actual sales</li>
+                            <li>Analyze price elasticity and competitive positioning</li>
+                        </ul>
                     </div>
                 </div>
             </div>
             
-            <!-- Charts Section -->
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header bg-primary text-white">
-                            <h4>Sales Trends</h4>
-                        </div>
-                        <div class="card-body">
-                            <div id="sales-chart">
-                                {sales_chart}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header bg-primary text-white">
-                            <h4>Inventory Status</h4>
-                        </div>
-                        <div class="card-body">
-                            <div id="inventory-chart">
-                                {inventory_chart}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Footer -->
             <footer class="container-fluid py-3 text-center text-muted">
                 <hr>
-                <p>Static dashboard generated on {generation_date}</p>
-                <p>This is a static version of the interactive dashboard. For full functionality, run the application locally.</p>
+                <p>Dashboard generated on {generation_date}</p>
             </footer>
-        </div>
-        
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
+            
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        </body>
     </html>
     """
     
