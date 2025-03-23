@@ -17,10 +17,31 @@ def load_data():
     """Load all necessary data for the dashboard."""
     try:
         # Load inventory data
-        df = pd.read_csv("data/retail_store_inventory.csv")
-        df['Date'] = pd.to_datetime(df['Date'])
+        try:
+            df = pd.read_csv("data/retail_store_inventory.csv")
+            df['Date'] = pd.to_datetime(df['Date'])
+        except Exception as e:
+            print(f"Error loading CSV data: {str(e)}")
+            # Create a minimal dataframe with essential columns
+            df = pd.DataFrame({
+                'Date': pd.date_range(start='2022-01-01', periods=30),
+                'Store ID': ['S001'] * 30,
+                'Product ID': ['P001'] * 30,
+                'Category': ['Sample'] * 30,
+                'Region': ['Sample'] * 30,
+                'Inventory Level': [100] * 30,
+                'Units Sold': [50] * 30,
+                'Units Ordered': [20] * 30,
+                'Demand Forecast': [60] * 30,
+                'Price': [50.0] * 30,
+                'Discount': [0] * 30,
+                'Weather Condition': ['Sunny'] * 30,
+                'Holiday/Promotion': [0] * 30,
+                'Competitor Pricing': [49.0] * 30,
+                'Seasonality': ['Summer'] * 30
+            })
         
-        # Create necessary derived columns if they don't exist
+        # Create necessary derived columns
         if 'Inventory_Sales_Ratio' not in df.columns:
             df['Inventory_Sales_Ratio'] = df['Inventory Level'] / df['Units Sold'].replace(0, np.nan)
         
@@ -30,7 +51,7 @@ def load_data():
         if 'Forecast_Accuracy' not in df.columns:
             df['Forecast_Accuracy'] = 1 - abs(df['Demand Forecast'] - df['Units Sold']) / df['Demand Forecast'].replace(0, np.nan)
         
-        # Create Supply_Status if it doesn't exist (using same logic as in the EDA script)
+        # Create Supply_Status if it doesn't exist
         if 'Supply_Status' not in df.columns:
             df['Optimal_Inventory'] = df['Units Sold'] * 1.5
             conditions = [
@@ -41,41 +62,57 @@ def load_data():
             values = ['Undersupplied', 'Optimal', 'Oversupplied']
             df['Supply_Status'] = np.select(conditions, values, default='Unknown')
         
-        # Load output files using corrected paths
+        # Load JSON files with error handling
         forecast_results = {}
         inventory_results = {}
         pricing_results = {}
         supply_results = {}
         
-        # Fix path for supply analysis results - it's in eda/supply_analysis not supply_analysis
-        try:
-            with open("output/eda/supply_analysis/supply_analysis_results.json", 'r') as f:
-                supply_results = json.load(f)
-                # Add log to help with debugging
-                print(f"Successfully loaded supply analysis data with {len(supply_results)} keys")
-        except Exception as e:
-            print(f"Error loading supply analysis data: {str(e)}")
+        # Make paths more flexible
+        json_paths = {
+            'supply': ["output/eda/supply_analysis/supply_analysis_results.json", 
+                      "output/supply_analysis/supply_analysis_results.json"],
+            'forecast': ["output/forecasting/forecast_results.json"],
+            'inventory': ["output/inventory_optimization/inventory_optimization_results.json"],
+            'pricing': ["output/pricing_strategy/pricing_strategy_results.json"]
+        }
         
-        try:
-            with open("output/forecasting/forecast_results.json", 'r') as f:
-                forecast_results = json.load(f)
-                print(f"Successfully loaded forecast data with {len(forecast_results)} keys")
-        except Exception as e:
-            print(f"Error loading forecast data: {str(e)}")
+        # Try multiple possible paths for each file
+        for path in json_paths['supply']:
+            try:
+                with open(path, 'r') as f:
+                    supply_results = json.load(f)
+                    print(f"Successfully loaded supply analysis data from {path}")
+                    break
+            except Exception as e:
+                print(f"Error loading supply analysis data from {path}: {str(e)}")
         
-        try:
-            with open("output/inventory_optimization/inventory_optimization_results.json", 'r') as f:
-                inventory_results = json.load(f)
-                print(f"Successfully loaded inventory data with {len(inventory_results)} keys")
-        except Exception as e:
-            print(f"Error loading inventory data: {str(e)}")
+        for path in json_paths['forecast']:
+            try:
+                with open(path, 'r') as f:
+                    forecast_results = json.load(f)
+                    print(f"Successfully loaded forecast data")
+                    break
+            except Exception as e:
+                print(f"Error loading forecast data: {str(e)}")
         
-        try:
-            with open("output/pricing_strategy/pricing_strategy_results.json", 'r') as f:
-                pricing_results = json.load(f)
-                print(f"Successfully loaded pricing data with {len(pricing_results)} keys")
-        except Exception as e:
-            print(f"Error loading pricing data: {str(e)}")
+        for path in json_paths['inventory']:
+            try:
+                with open(path, 'r') as f:
+                    inventory_results = json.load(f)
+                    print(f"Successfully loaded inventory data")
+                    break
+            except Exception as e:
+                print(f"Error loading inventory data: {str(e)}")
+        
+        for path in json_paths['pricing']:
+            try:
+                with open(path, 'r') as f:
+                    pricing_results = json.load(f)
+                    print(f"Successfully loaded pricing data")
+                    break
+            except Exception as e:
+                print(f"Error loading pricing data: {str(e)}")
         
         return {
             'df': df,
@@ -86,8 +123,9 @@ def load_data():
         }
     except Exception as e:
         print(f"Error in load_data: {str(e)}")
+        # Return minimal data to prevent crashes
         return {
-            'df': pd.DataFrame(),
+            'df': pd.DataFrame({'Date': pd.date_range(start='2022-01-01', periods=10)}),
             'forecast_results': {},
             'inventory_results': {},
             'pricing_results': {},
