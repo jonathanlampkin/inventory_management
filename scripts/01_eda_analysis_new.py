@@ -1,40 +1,40 @@
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
+from datetime import datetime
 import os
 import json
-from datetime import datetime
-from scipy.stats import pearsonr
 import warnings
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 # Suppress non-critical warnings
 warnings.filterwarnings('ignore')
 
-# Set style for plots
-plt.style.use('seaborn-v0_8-whitegrid')
-sns.set_palette("Set2")
-plt.rcParams['figure.figsize'] = (12, 8)
-plt.rcParams['font.size'] = 12
-
 class RetailEDA:
     """Comprehensive EDA class for retail inventory analysis."""
     
-    def __init__(self, data_path, output_dir="output/eda"):
-        """Initialize the EDA class with data and output directory."""
+    def __init__(self, data_path, output_dir):
+        """Initialize the EDA class."""
         self.data_path = data_path
         self.output_dir = output_dir
-        self.df = None
-        self.performance_metrics = {}
         self.start_time = datetime.now()
         
-        # Create output directories
-        self.create_output_dirs()
+        # Define output paths
+        self.output_paths = {
+            'visualizations': f"{output_dir}/eda/visualizations",
+            'seasonality': f"{output_dir}/eda/seasonality_analysis",
+            'supply': f"{output_dir}/eda/supply_analysis",
+            'recommendations': f"{output_dir}/eda/recommendations"
+        }
         
-    def create_output_dirs(self):
-        """Create necessary output directory for results."""
-        os.makedir(self.output_dir, exist_ok=True)
- 
+        # Create output directories
+        for path in self.output_paths.values():
+            os.makedirs(path, exist_ok=True)
+            os.makedirs(f"{path}/seasonal", exist_ok=True)
+            os.makedirs(f"{path}/supply", exist_ok=True)
+        
+        # Initialize performance metrics
+        self.performance_metrics = {}
         
     def load_data(self):
         """Load and preprocess the data."""
@@ -130,43 +130,6 @@ class RetailEDA:
         plt.savefig(f"{self.output_paths['visualizations']}/units_sold_by_category.png")
         plt.close()
         
-        # Price vs Units Sold
-        plt.figure(figsize=(10, 6))
-        sns.scatterplot(data=self.df.sample(5000), x='Price', y='Units Sold', alpha=0.5, hue='Category')
-        plt.title('Price vs Units Sold (Sample of 5000 points)', fontsize=16)
-        plt.xlabel('Price')
-        plt.ylabel('Units Sold')
-        plt.grid(True, alpha=0.3)
-        plt.tight_layout()
-        plt.savefig(f"{self.output_paths['visualizations']}/price_vs_units_sold.png")
-        plt.close()
-        
-        # Inventory vs Sales
-        plt.figure(figsize=(10, 6))
-        sns.scatterplot(data=self.df.sample(5000), x='Inventory Level', y='Units Sold', alpha=0.5, hue='Category')
-        plt.title('Inventory Level vs Units Sold (Sample of 5000 points)', fontsize=16)
-        plt.xlabel('Inventory Level')
-        plt.ylabel('Units Sold')
-        plt.grid(True, alpha=0.3)
-        plt.tight_layout()
-        plt.savefig(f"{self.output_paths['visualizations']}/inventory_vs_sales.png")
-        plt.close()
-        
-        # Monthly sales trend
-        monthly_sales = self.df.groupby([self.df['Date'].dt.year, self.df['Date'].dt.month])['Units Sold'].sum().reset_index()
-        monthly_sales.columns = ['Year', 'Month', 'Units Sold']
-        
-        plt.figure(figsize=(14, 6))
-        plt.plot(monthly_sales['YearMonth'], monthly_sales['Units Sold'], marker='o')
-        plt.title('Monthly Sales Trend', fontsize=16)
-        plt.xlabel('Year-Month')
-        plt.ylabel('Total Units Sold')
-        plt.xticks(rotation=45)
-        plt.grid(True, alpha=0.3)
-        plt.tight_layout()
-        plt.savefig(f"{self.output_paths['visualizations']}/monthly_sales_trend.png")
-        plt.close()
-        
         # Calculate performance metrics
         end = datetime.now()
         self.performance_metrics['basic_stats'] = {
@@ -178,7 +141,7 @@ class RetailEDA:
             'summary_stats': summary_stats.to_dict(),
             'correlation': correlation.to_dict()
         }
-
+        
     def analyze_seasonality(self):
         """Analyze seasonal patterns in the data."""
         print("Analyzing seasonality patterns...")
@@ -347,8 +310,8 @@ class RetailEDA:
         # Generate seasonality report
         self.generate_seasonality_report(seasonality_results)
         
-        return seasonality_results 
-
+        return seasonality_results
+        
     def analyze_supply(self):
         """Analyze supply levels and identify issues."""
         print("Analyzing supply patterns...")
@@ -490,8 +453,8 @@ class RetailEDA:
             self.df[self.df['Forecast_Accuracy'] < self.df['Forecast_Accuracy'].quantile(0.1)]
         )
         
-        return supply_results 
-
+        return supply_results
+        
     def generate_seasonality_report(self, seasonality_results):
         """Generate a report with seasonal analysis findings."""
         with open(f"{self.output_paths['recommendations']}/seasonality_report.md", "w") as f:
@@ -561,7 +524,7 @@ class RetailEDA:
             region_peaks = seasonality_results['region_seasonality']['region_peak_season']
             best_region = max(region_peaks.items(), key=lambda x: x[1]['peak_value'])
             f.write(f"4. **Strongest Regional Performance**: {best_region[0]} region peaks at {best_region[1]['peak_value']:.2f} units in {best_region[1]['peak_month']}\n")
-    
+            
     def generate_supply_recommendations(self, critical_undersupply, excessive_oversupply, poor_forecast):
         """Generate specific product recommendations based on supply analysis."""
         print("Generating supply recommendations...")
@@ -588,22 +551,15 @@ class RetailEDA:
                 f.write(f"| {row['Product ID']} | {row['Category']} | {row['Supply_Gap']:.2f} | {row['Units Sold']:.0f} | {row['Inventory Level']:.2f} | {row['Forecast_Accuracy']:.2f} |\n")
             f.write("\n")
             
-            # General recommendations
-            f.write("## General Inventory Recommendations\n\n")
+            f.write("## Products with Poor Forecast Accuracy\n\n")
+            f.write("These products have low forecast accuracy and may need review of forecasting methods:\n\n")
             
-            avg_metrics = self.df.groupby('Supply_Status').size() / len(self.df) * 100
-            optimal_pct = avg_metrics.get('Optimal', 0)
+            f.write("| Product ID | Category | Forecast Accuracy |\n")
+            f.write("|------------|----------|-------------------|\n")
+            for _, row in poor_forecast.head(5).iterrows():
+                f.write(f"| {row['Product ID']} | {row['Category']} | {row['Forecast_Accuracy']:.2f} |\n")
+            f.write("\n")
             
-            f.write(f"- **Current Optimal Inventory Rate**: {optimal_pct:.1f}% of products are optimally supplied\n")
-            f.write(f"- **Target Optimal Inventory Rate**: 75% or higher\n\n")
-            
-            f.write("### Key Recommendations:\n\n")
-            f.write("1. **Implement Just-in-Time Inventory**: For high-volume products with consistent demand\n")
-            f.write("2. **Increase Safety Stock**: For products with high variability or critical to business\n")
-            f.write("3. **Review Order Frequency**: Consider more frequent orders with smaller quantities\n")
-            f.write("4. **Improve Forecast Models**: Especially for products with poor forecast accuracy\n")
-            f.write("5. **Implement Cross-Store Balancing**: Redistribute inventory between stores to address local shortages\n")
-    
     def generate_summary_report(self):
         """Generate a comprehensive EDA summary report."""
         with open(f"{self.output_paths['recommendations']}/eda_summary_report.md", "w") as f:
@@ -697,7 +653,7 @@ class RetailEDA:
             f.write("3. **Improve Forecasting Accuracy**: Review forecasting methods for products with poor accuracy\n")
             f.write("4. **Optimize by Category**: Apply category-specific inventory strategies based on seasonality and supply patterns\n")
             f.write("5. **Regional Adjustments**: Customize inventory plans by region to account for regional variations\n")
-
+            
     def run_analysis(self):
         """Run the complete EDA analysis pipeline."""
         print("Starting comprehensive EDA analysis...")
@@ -741,41 +697,7 @@ class RetailEDA:
         print(f"EDA completed in {total_runtime:.2f} seconds")
         print(f"Results saved to {self.output_dir}/eda/")
 
-    def analyze_product_performance(self):
-        """Analyze product performance using statistical thresholds"""
-        # Calculate sales quantiles
-        sales_quantiles = self.df.groupby('Product ID')['Units Sold'].sum().quantile([0.95, 0.05])
-        
-        # High performers (top 5%)
-        top_products = self.df[self.df['Product ID'].isin(
-            self.df.groupby('Product ID')['Units Sold'].sum()
-            .sort_values(ascending=False)
-            .head(int(len(self.df['Product ID'].unique()) * 0.05))
-            .index
-        )]
-        
-        # Low performers (bottom 5%)
-        low_products = self.df[self.df['Product ID'].isin(
-            self.df.groupby('Product ID')['Units Sold'].sum()
-            .sort_values()
-            .head(int(len(self.df['Product ID'].unique()) * 0.05))
-            .index
-        )]
-        
-        return top_products, low_products
-
-def main():
-    """Main function to run the EDA analysis."""
-    print("Starting Retail Inventory EDA...")
-    
-    data_path = "data/retail_store_inventory.csv"
-    output_dir = "output"
-    
-    # Initialize and run EDA
-    eda = RetailEDA(data_path, output_dir)
-    eda.run_analysis()
-    
-    print("EDA analysis complete!")
-
 if __name__ == "__main__":
-    main()
+    # Initialize and run EDA
+    eda = RetailEDA("data/retail_store_inventory.csv", "output")
+    eda.run_analysis() 
