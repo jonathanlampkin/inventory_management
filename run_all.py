@@ -26,7 +26,7 @@ def run_script(script_path, log_dir):
     # Run the script and capture output
     try:
         process = subprocess.Popen(
-            ['python', script_path], 
+            ['python3', script_path], 
             stdout=subprocess.PIPE, 
             stderr=subprocess.PIPE,
             universal_newlines=True

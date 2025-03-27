@@ -1,18 +1,52 @@
 {
-    "status": "failed",
-    "timestamp": "2025-03-22 11:27:02",
-    "file": "data/retail_store_inventory.csv",
+    "status": "passed",
+    "timestamp": "2025-03-26 23:26:35",
+    "file": "data/processed_inventory.csv",
     "rows": 73100,
-    "columns": 15,
+    "columns": 20,
     "schema_validation": {
-        "passed": false,
-        "errors": [
-            {
-                "column": null,
-                "row": -1,
-                "message": "Invalid number of columns. The schema specifies 13, but the data frame has 15"
-            }
-        ]
+        "passed": true,
+        "errors": []
     },
     "missing_values": {
-        "has_missing": 
+        "has_missing": "True",
+        "counts": {
+            "Date": 0,
+            "Store_ID": 0,
+            "Product_ID": 0,
+            "Category": 0,
+            "Region": 0,
+            "Inventory_Level": 0,
+            "Units_Sold": 0,
+            "Units_Ordered": 0,
+            "Demand_Forecast": 0,
+            "Price": 0,
+            "Discount": 0,
+            "Weather_Condition": 0,
+            "Holiday_Promotion": 0,
+            "Competitor_Pricing": 0,
+            "Seasonality": 0,
+            "Inventory_Sales_Ratio": 360,
+            "Sell_Through_Rate": 0,
+            "Forecast_Accuracy": 0,
+            "Supply_Gap": 0,
+            "Inventory_Status": 0
+        }
+    },
+    "duplicates": {
+        "has_duplicates": "False",
+        "count": 0
+    },
+    "outliers": {
+        "has_outliers": false,
+        "counts": {}
+    },
+    "date_validation": {
+        "passed": true,
+        "issues": []
+    },
+    "negative_values": {
+        "has_negatives": false,
+        "counts": {}
+    }
+}

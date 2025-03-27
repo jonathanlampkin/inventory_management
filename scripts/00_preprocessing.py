@@ -1,120 +1,69 @@
-import pandas as pd
 import numpy as np
-from datetime import datetime
-import os
-import warnings
-
-# Suppress non-critical warnings
-warnings.filterwarnings('ignore')
+import pandas as pd
 
 class DataPreprocessor:
-    """Handles all data preprocessing tasks for the retail inventory analysis."""
-    
-    def __init__(self, data_path, output_dir="data/processed"):
-        """Initialize the preprocessor with data path and output directory."""
-        self.data_path = data_path
-        self.output_dir = output_dir
-        self.df = None
+    def __init__(self, df):
+        self.df = df
+        self.rename_columns()
+
+    def rename_columns(self):
+        """Rename columns to use underscores instead of spaces."""
+        column_mapping = {
+            'Store ID': 'Store_ID',
+            'Product ID': 'Product_ID',
+            'Inventory Level': 'Inventory_Level',
+            'Units Sold': 'Units_Sold',
+            'Units Ordered': 'Units_Ordered',
+            'Demand Forecast': 'Demand_Forecast',
+            'Weather Condition': 'Weather_Condition',
+            'Holiday/Promotion': 'Holiday_Promotion',
+            'Competitor Pricing': 'Competitor_Pricing'
+        }
+        self.df = self.df.rename(columns=column_mapping)
+
+    def calculate_derived_features(self):
+        # Calculate derived features
+        self.df['Inventory_Sales_Ratio'] = self.df['Inventory_Level'] / self.df['Units_Sold'].replace(0, np.nan)
+        self.df['Sell_Through_Rate'] = self.df['Units_Sold'] / (self.df['Inventory_Level'] + self.df['Units_Sold'])
         
-        # Create output directory
-        os.makedirs(output_dir, exist_ok=True)
+        # Calculate forecast accuracy (normalized between -1 and 1)
+        error = self.df['Demand_Forecast'] - self.df['Units_Sold']
+        max_val = np.maximum(np.abs(self.df['Demand_Forecast']), np.abs(self.df['Units_Sold']))
+        accuracy = -error / max_val.replace(0, np.nan)  # Negative because positive error means overforecast
+        self.df['Forecast_Accuracy'] = np.clip(accuracy, -1, 1)  # Clip values to [-1, 1] range
         
-    def load_data(self):
-        """Load the raw data."""
-        print("Loading data...")
-        self.df = pd.read_csv(self.data_path)
-        return self
-        
-    def process_dates(self):
-        """Process and create date-related features."""
-        print("Processing dates...")
-        self.df['Date'] = pd.to_datetime(self.df['Date'])
-        self.df['Month'] = self.df['Date'].dt.month
-        self.df['Year'] = self.df['Date'].dt.year
-        self.df['Day'] = self.df['Date'].dt.day
-        self.df['Quarter'] = self.df['Date'].dt.quarter
-        self.df['DayOfWeek'] = self.df['Date'].dt.dayofweek
-        self.df['WeekOfYear'] = self.df['Date'].dt.isocalendar().week
-        self.df['MonthName'] = self.df['Date'].dt.strftime('%b')
-        
-        # Ensure MonthName is ordered correctly
-        month_order = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-        self.df['MonthName'] = pd.Categorical(self.df['MonthName'], categories=month_order, ordered=True)
-        
-        return self
-        
-    def create_metrics(self):
-        """Create derived metrics and ratios."""
-        print("Creating derived metrics...")
-        
-        # Inventory and sales metrics
-        self.df['Inventory_Sales_Ratio'] = self.df['Inventory Level'] / self.df['Units Sold'].replace(0, np.nan)
-        self.df['Sell_Through_Rate'] = self.df['Units Sold'] / (self.df['Inventory Level'] + self.df['Units Sold'])
-        self.df['Forecast_Accuracy'] = 1 - abs(self.df['Demand Forecast'] - self.df['Units Sold']) / self.df['Demand Forecast'].replace(0, np.nan)
-        self.df['Supply_Gap'] = self.df['Inventory Level'] - self.df['Units Sold']
-        
-        # Supply status categories
+        self.df['Supply_Gap'] = self.df['Inventory_Level'] - self.df['Units_Sold']
+
+        # Calculate inventory status
         conditions = [
-            (self.df['Inventory Level'] < self.df['Units Sold']),
-            (self.df['Inventory Level'] >= self.df['Units Sold']) & 
-            (self.df['Inventory Level'] <= self.df['Units Sold'] * 1.5),
-            (self.df['Inventory Level'] > self.df['Units Sold'] * 1.5)
+            (self.df['Inventory_Level'] < self.df['Units_Sold']),
+            (self.df['Inventory_Level'] >= self.df['Units_Sold']) & (self.df['Inventory_Level'] <= self.df['Units_Sold'] * 1.5),
+            (self.df['Inventory_Level'] > self.df['Units_Sold'] * 1.5)
         ]
-        choices = ['Undersupplied', 'Optimal', 'Oversupplied']
-        self.df['Supply_Status'] = np.select(conditions, choices, default='Unknown')
-        
-        return self
-        
-    def handle_missing_values(self):
-        """Handle missing values in the dataset."""
-        print("Handling missing values...")
-        
-        # Fill missing values with appropriate methods
-        numeric_columns = self.df.select_dtypes(include=[np.number]).columns
-        self.df[numeric_columns] = self.df[numeric_columns].fillna(self.df[numeric_columns].mean())
-        
-        categorical_columns = self.df.select_dtypes(include=['object']).columns
-        self.df[categorical_columns] = self.df[categorical_columns].fillna('Unknown')
-        
-        return self
-        
-    def save_processed_data(self):
-        """Save the processed dataset."""
-        print("Saving processed data...")
-        output_path = os.path.join(self.output_dir, "processed_data.csv")
-        self.df.to_csv(output_path, index=False)
-        print(f"Processed data saved to {output_path}")
-        return self
-        
-    def run_preprocessing(self):
-        """Run the complete preprocessing pipeline."""
-        print("Starting data preprocessing...")
-        start_time = datetime.now()
-        
-        self.load_data()
-        self.process_dates()
-        self.create_metrics()
-        self.handle_missing_values()
-        self.save_processed_data()
-        
-        end_time = datetime.now()
-        duration = (end_time - start_time).total_seconds()
-        print(f"Preprocessing completed in {duration:.2f} seconds")
-        
+        choices = np.array(['Understocked', 'In stock', 'Overstocked'], dtype=str)
+        self.df['Inventory_Status'] = np.select(conditions, choices, default='Unknown')
         return self.df
 
 def main():
-    """Main function to run the preprocessing pipeline."""
-    print("Starting Retail Inventory Data Preprocessing...")
-    
-    data_path = "data/retail_store_inventory.csv"
-    output_dir = "data/processed"
-    
-    # Initialize and run preprocessing
-    preprocessor = DataPreprocessor(data_path, output_dir)
-    processed_df = preprocessor.run_preprocessing()
-    
-    print("Data preprocessing complete!")
+    """Main function to preprocess the data."""
+    try:
+        # Load the data
+        print("Loading data...")
+        df = pd.read_csv('data/retail_store_inventory.csv')
+        
+        # Create preprocessor instance and process data
+        print("Processing data...")
+        preprocessor = DataPreprocessor(df)
+        processed_df = preprocessor.calculate_derived_features()
+        
+        # Save processed data
+        output_path = 'data/processed_inventory.csv'
+        processed_df.to_csv(output_path, index=False)
+        print(f"Processed data saved to {output_path}")
+        return 0
+    except Exception as e:
+        print(f"Error processing data: {str(e)}")
+        return 1
 
 if __name__ == "__main__":
-    main() 
+    exit(main()) 
