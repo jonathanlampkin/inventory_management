@@ -32,7 +32,7 @@ class DataValidator:
         """
         self.config = config or {}
         self.required_columns = [
-            'Date',
+            'date',  # Use lowercase date
             'Store_ID',
             'Product_ID',
             'Category',
@@ -71,6 +71,10 @@ class DataValidator:
         """
         try:
             logger.info("Starting data validation")
+            
+            # Handle date column case sensitivity
+            if 'Date' in df.columns and 'date' not in df.columns:
+                df = df.rename(columns={'Date': 'date'})
             
             results = {
                 'schema': self.validate_schema(df),
@@ -171,14 +175,14 @@ class DataValidator:
                     errors.append(f"Found {invalid_discounts} invalid discount values")
             
             # Check date range
-            if 'Date' in df.columns:
-                df['Date'] = pd.to_datetime(df['Date'], errors='coerce')
-                date_range = (df['Date'].max() - df['Date'].min()).days
+            if 'date' in df.columns:
+                df['date'] = pd.to_datetime(df['date'], errors='coerce')
+                date_range = (df['date'].max() - df['date'].min()).days
                 if date_range < 30:
                     warnings.append(f"Date range is only {date_range} days")
+                metrics['date_range_days'] = date_range
             
             # Record metrics
-            metrics['date_range_days'] = date_range
             metrics['null_counts'] = df.isnull().sum().to_dict()
             
             return ValidationResult(

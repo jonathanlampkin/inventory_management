@@ -153,24 +153,32 @@ class DataPreprocessor:
             raise PreprocessingError(f"Data type conversion failed: {str(e)}")
 
     def process_dates(self, df: pd.DataFrame) -> pd.DataFrame:
-        """Process date columns.
-        
-        Args:
-            df: Input DataFrame
-            
-        Returns:
-            DataFrame with processed dates
-        """
+        """Process date columns."""
         try:
             # Convert date columns to datetime
-            date_columns = self.config.validation.get('date_columns', [])
+            date_columns = ['Date', 'date']  # Handle both cases
             for col in date_columns:
                 if col in df.columns:
                     df[col] = pd.to_datetime(df[col])
             
+            # Ensure we have a 'Date' column
+            if 'date' in df.columns and 'Date' not in df.columns:
+                df = df.rename(columns={'date': 'Date'})
+            elif 'Date' not in df.columns:
+                logger.warning("No date column found")
+                return df
+            
+            # Create time-based features
+            df['Year'] = df['Date'].dt.year
+            df['Month'] = df['Date'].dt.month
+            df['Day'] = df['Date'].dt.day
+            df['DayOfWeek'] = df['Date'].dt.dayofweek
+            df['Quarter'] = df['Date'].dt.quarter
+            
             return df
             
         except Exception as e:
+            logger.error(f"Date processing failed: {str(e)}")
             raise PreprocessingError(f"Date processing failed: {str(e)}")
 
     def create_derived_features(self, df: pd.DataFrame) -> pd.DataFrame:
@@ -187,7 +195,7 @@ class DataPreprocessor:
             if hasattr(self.config, 'derived_features'):
                 for feature in self.config.derived_features:
                     if feature['type'] == 'rolling_mean':
-                        df[feature['name']] = df.groupby(feature['group_by'])[feature['column']].transform(
+                        df[feature['name']] = df.groupby(feature['group_by'], observed=True)[feature['column']].transform(
                             lambda x: x.rolling(window=feature['window'], min_periods=1).mean()
                         )
                     elif feature['type'] == 'lag':

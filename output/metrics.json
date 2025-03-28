@@ -1,0 +1,18 @@
+{
+    "start_time": "2025-03-28T00:17:40.074595",
+    "component_times": {
+        "data_processing": {
+            "start": "2025-03-28T00:17:40.074882",
+            "duration": 0.219052
+        },
+        "optimization": {
+            "start": "2025-03-28T00:17:43.134895",
+            "duration": 0.233514
+        },
+        "dashboard": {
+            "start": "2025-03-28T00:17:43.369284",
+            "duration": 0.028454
+        }
+    },
+    "total_execution_time": 3.323881
+}

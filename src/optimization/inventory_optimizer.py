@@ -127,65 +127,122 @@ class InventoryOptimizer:
         InventoryPolicy
             Optimized inventory policy
         """
-        # Get forecasts
-        features = self.forecaster._prepare_features(historical_data)
-        demand_forecast = self.forecaster.predict(features)
-        
-        # Calculate demand statistics
-        demand_mean = np.mean(demand_forecast)
-        demand_std = np.std(demand_forecast)
-        annual_demand = np.sum(demand_forecast) * (365 / len(demand_forecast))
-        
-        # Get product cost
-        unit_cost = historical_data['unit_cost'].iloc[0]
-        
-        # Apply cluster-specific adjustments if available
-        if cluster_id in self.forecaster.cluster_models:
-            cluster_adjustment = self.forecaster.cluster_models[cluster_id].predict(features)
-            demand_mean += np.mean(cluster_adjustment)
-            demand_std = np.std(demand_forecast + cluster_adjustment)
-        
-        # Calculate base service level based on product value
-        base_service_level = 0.95  # Default
-        if constraints and 'service_level' in constraints:
-            base_service_level = constraints['service_level']
-        elif unit_cost > 100:  # High-value items get higher service level
-            base_service_level = 0.98
-        
-        # Calculate policy parameters
-        safety_stock = self.calculate_safety_stock(
-            demand_std,
-            base_service_level
-        )
-        
-        reorder_point = self.calculate_reorder_point(
-            demand_mean,
-            demand_std,
-            base_service_level
-        )
-        
-        eoq = self.calculate_eoq(
-            annual_demand,
-            unit_cost
-        )
-        
-        # Adjust for constraints
-        if constraints:
-            if 'max_order_quantity' in constraints:
-                eoq = min(eoq, constraints['max_order_quantity'])
-            if 'min_order_quantity' in constraints:
-                eoq = max(eoq, constraints['min_order_quantity'])
-        
-        # Calculate review period (in days)
-        review_period = int(np.ceil(eoq / demand_mean))
-        
-        return InventoryPolicy(
-            reorder_point=reorder_point,
-            order_quantity=eoq,
-            safety_stock=safety_stock,
-            review_period=review_period,
-            service_level=base_service_level
-        )
+        try:
+            # Prepare data
+            data = historical_data.copy()
+            
+            # Ensure required columns exist
+            required_columns = ['Units_Sold', 'Price', 'Inventory_Level']
+            for col in required_columns:
+                if col not in data.columns:
+                    logger.warning(f"Missing required column {col}, using defaults")
+                    if col == 'Units_Sold':
+                        data[col] = 1
+                    elif col == 'Price':
+                        data[col] = 100.0
+                    elif col == 'Inventory_Level':
+                        data[col] = 10.0
+            
+            # Ensure product_id column exists
+            if 'Product_ID' not in data.columns:
+                logger.warning("Missing Product_ID column, using provided product_id")
+                data['Product_ID'] = product_id
+            
+            # Ensure date column exists and is datetime
+            if 'date' not in data.columns:
+                logger.warning("Missing date column, using index")
+                data['date'] = pd.date_range(start='2024-01-01', periods=len(data), freq='D')
+            elif not pd.api.types.is_datetime64_any_dtype(data['date']):
+                data['date'] = pd.to_datetime(data['date'])
+            
+            # Sort data by date and reset index
+            data = data.sort_values('date').reset_index(drop=True)
+            
+            # Get forecasts
+            try:
+                features = self.forecaster._prepare_features(data)
+                # Create cluster assignments array
+                clusters = np.full(len(data), cluster_id)
+                demand_forecast = self.forecaster.predict(features, clusters)
+            except Exception as e:
+                logger.warning(f"Error generating forecasts: {str(e)}")
+                # Use historical data as fallback
+                demand_forecast = data['Units_Sold'].values
+            
+            # Calculate demand statistics with robust methods
+            demand_mean = np.median(demand_forecast)  # Use median for robustness
+            demand_std = np.std(demand_forecast)
+            
+            # Handle zero or negative demand
+            if demand_mean <= 0:
+                demand_mean = data['Units_Sold'].median()
+            if demand_std <= 0:
+                demand_std = data['Units_Sold'].std()
+            
+            # Calculate annual demand with robust scaling
+            days_in_data = len(data)
+            if days_in_data < 30:  # If less than 30 days of data
+                annual_demand = demand_mean * 365
+            else:
+                annual_demand = np.sum(demand_forecast) * (365 / days_in_data)
+            
+            # Get product cost with fallback
+            unit_cost = data['unit_cost'].iloc[0] if 'unit_cost' in data.columns else data['Price'].mean() * 0.7
+            
+            # Apply cluster-specific adjustments if available
+            if cluster_id in self.forecaster.cluster_models:
+                try:
+                    cluster_adjustment = self.forecaster.cluster_models[cluster_id].predict(features)
+                    demand_mean += np.median(cluster_adjustment)  # Use median for robustness
+                    demand_std = np.std(demand_forecast + cluster_adjustment)
+                except Exception as e:
+                    logger.warning(f"Error applying cluster adjustments: {str(e)}")
+            
+            # Calculate base service level based on product value and demand variability
+            base_service_level = 0.95  # Default
+            if constraints and 'service_level' in constraints:
+                base_service_level = constraints['service_level']
+            elif unit_cost > 100:  # High-value items get higher service level
+                base_service_level = 0.98
+            elif demand_std / demand_mean > 0.5:  # High variability items get higher service level
+                base_service_level = 0.97
+            
+            # Calculate policy parameters
+            eoq = self.calculate_eoq(annual_demand, unit_cost)
+            reorder_point = self.calculate_reorder_point(demand_mean, demand_std, base_service_level)
+            safety_stock = self.calculate_safety_stock(demand_std, base_service_level)
+            
+            # Validate policy parameters
+            if not all(np.isfinite([eoq, reorder_point, safety_stock])):
+                logger.warning("Invalid policy parameters, using defaults")
+                eoq = max(annual_demand / 12, 1)  # At least 1 unit
+                reorder_point = max(demand_mean * self.lead_time_days, 1)
+                safety_stock = max(demand_std * np.sqrt(self.lead_time_days), 1)
+            
+            # Ensure minimum order quantity
+            order_quantity = max(eoq, 1)
+            
+            # Calculate review period with bounds
+            review_period = max(min(int(order_quantity / demand_mean), 30), 1)
+            
+            return InventoryPolicy(
+                reorder_point=float(reorder_point),
+                order_quantity=float(order_quantity),
+                safety_stock=float(safety_stock),
+                review_period=int(review_period),
+                service_level=float(base_service_level)
+            )
+            
+        except Exception as e:
+            logger.error(f"Error optimizing inventory policy: {str(e)}")
+            # Return a conservative default policy
+            return InventoryPolicy(
+                reorder_point=10.0,
+                order_quantity=10.0,
+                safety_stock=5.0,
+                review_period=7,
+                service_level=0.95
+            )
     
     def optimize_all(self, data: pd.DataFrame, cluster_models: Dict[int, Any]) -> Dict[str, Any]:
         """Optimize inventory policies for all clusters.

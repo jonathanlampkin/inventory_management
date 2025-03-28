@@ -1,0 +1,42 @@
+{
+    "0": {
+        "error": "Invalid elasticity value",
+        "sample_size": 7310
+    },
+    "1": {
+        "error": "Invalid elasticity value",
+        "sample_size": 32895
+    },
+    "2": {
+        "error": "Invalid elasticity value",
+        "sample_size": 7310
+    },
+    "3": {
+        "error": "Invalid elasticity value",
+        "sample_size": 3655
+    },
+    "4": {
+        "error": "Invalid elasticity value",
+        "sample_size": 3655
+    },
+    "5": {
+        "error": "Invalid elasticity value",
+        "sample_size": 3655
+    },
+    "6": {
+        "error": "Invalid elasticity value",
+        "sample_size": 3655
+    },
+    "7": {
+        "error": "Invalid elasticity value",
+        "sample_size": 3655
+    },
+    "8": {
+        "error": "Invalid elasticity value",
+        "sample_size": 3655
+    },
+    "9": {
+        "error": "Invalid elasticity value",
+        "sample_size": 3655
+    }
+}

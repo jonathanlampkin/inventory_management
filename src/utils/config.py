@@ -1,8 +1,9 @@
 import json
 from typing import Dict, Any, Optional, List
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, asdict
 from pathlib import Path
 import os
+import yaml
 
 @dataclass
 class DataConfig:
@@ -316,6 +317,35 @@ class Config:
     @classmethod
     def load(cls, config_path: str) -> 'Config':
         """Load configuration from JSON file."""
-        config = cls()
-        config.load_config(config_path)
-        return config 
+        path = Path(config_path)
+        
+        if not path.exists():
+            return cls()
+        
+        with open(path) as f:
+            if path.suffix == '.json':
+                config_dict = json.load(f)
+            elif path.suffix in ['.yml', '.yaml']:
+                config_dict = yaml.safe_load(f)
+            else:
+                raise ValueError(f"Unsupported config file format: {path.suffix}")
+        
+        return cls(
+            data=DataConfig(**config_dict.get('data', {})),
+            model=ModelConfig(**config_dict.get('model', {})),
+            inventory=InventoryConfig(**config_dict.get('inventory', {})),
+            pricing=PricingConfig(**config_dict.get('pricing', {})),
+            dashboard=DashboardConfig(**config_dict.get('dashboard', {})),
+            logging=LoggingConfig(**config_dict.get('logging', {}))
+        )
+    
+    def dict(self) -> dict:
+        """Convert config to dictionary."""
+        return {
+            'data': asdict(self.data),
+            'model': asdict(self.model),
+            'inventory': asdict(self.inventory),
+            'pricing': asdict(self.pricing),
+            'dashboard': asdict(self.dashboard),
+            'logging': asdict(self.logging)
+        } 
